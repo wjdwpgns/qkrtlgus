@@ -1,0 +1,139 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation&family=Gaegu&family=Satisfy&family=Shadows+Into+Light&family=Source+Code+Pro:ital,wght@1,300&display=swap');
+*{margin: 0px; padding: 0px; box-sizing: border-box;}
+ul,dl,li{list-style: none;}
+a{text-decoration: none;}
+
+section{
+    width: 100%;
+    /* section이 브라우저 전체의 너비를 
+    가지도록 하겠다는 코드 */
+    padding: 180px 0 150px;
+    /* section 공간에 padding을 부여하는 코드
+    위 쪽으로는 180, 좌우는 0 아래쪽으로는 150
+    을 주겠다는 의미입니다 */
+}
+section .inner{
+    width: 1180px;
+    /* 12컬럼 그리드를 사용하기 위해서 1180px을 줍니다 */
+    margin: 0 auto;
+    /* inner를 가운데 배치도록 하기 위한 코드
+    바깥 여백을 위아래는 주지 않고, 죄우로는 가운데 배치
+    될 수 있도록 auto를 부여합니다*/
+}
+section .inner h1{
+    font: bold 24px/1 'arial';
+    /* font-family가 arial */
+    color: #555;
+    margin-bottom: 50px;
+    /* h1과 wrap과의 바깥 간격을 50px을 부여합니다 */
+    text-align: center;
+    /* 텍스트를 가운데 정렬합니다 */
+}
+/* 플롯 해제하기 */
+/* wrap의 자식요소인 article을 float하면서
+부모인 wrap이 자식요소들의 높이를 인식하지 못하게 됌
+따라서 높이를 인식할 수 있게 float을 해제해주는 공식입니다
+(after를 부모요소 뒤어 필수적으로 사용해야합니다) */
+section .inner .wrap article::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+section .inner .wrap article{
+    width: 280px;
+    /* 12컬럼 그리드에서 4단은 280px 이기 때문 */
+    height: 200px;
+    float: left;
+    /* 블록요소를 좌우배치하기 위해 부여 */
+    margin-right: 20px;
+    /* 각각 요소들의 바깥 여백을 주어 사이릉 띄어줍니다 */
+    position: relative;
+    overflow: hidden;
+    /* article영겨을 벗어나는 컨텐츠를 잘라서
+    다른 영역에 침범하지 않도록 합니다 */
+}
+/* 280에 모두 공통적으로 20px의 margin-right을 주었기 때문에
+1200px이 되면서 inner의 1180px을 넘기게 되어 레이아웃이 깨지게
+되기 때문에 마지막 article요소를 선택한 뒤 margin-right를 0을
+주어 1180px을 맞춰주어야 레이아웃이 알맞게 형성됩니다*/
+section .inner .wrap article:nth-of-type(4){
+    margin-right: 0px;
+}
+/* 이미지를 article안에 알맞게 넣기 위한 공식 */
+section .inner .wrap article img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* hover 사용 시 커지는 효과에 transition을 부여합니다 */
+    transition: all 1s;
+}
+section .inner .wrap article:hover img{
+    transform: scale(1.2);
+}
+section .inner .wrap article p{
+    font: 20px/1 'arial';
+    color: #fff;
+    position: absolute;
+    z-index: 3;
+    opacity: 0;
+    transition: 0.5s;
+}
+section .inner .wrap article:hover p{
+    opacity: 1;
+}
+section .inner .wrap article::after{
+    content: '';
+    /* 가상선택자를 사용하면 필수적으로 적용 */
+    display: block;
+    /* article과 같은 너비와 높이를 지정해주기 위해 부여 */
+    background-color: rgba(255, 155, 155, 0.8);
+    /* article과 같은 너비,높이으 가상선택자 마스크를 적용 */
+    width: 100%;
+    height: 100%;
+    /* after로 잡은 가상선택자 마스크를 겹치기 위해서
+    밑에 3개지 코드를 작성합니다 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* hover에 마스크가 이동할 수 있게 트렌지션을 부여해줍니다 */
+    transition: all 0.5s;
+}
+section .inner .wrap article:nth-of-type(1) p {
+    top: 45%; left: -4%;
+    transform: rotate(90deg);
+}
+section .inner .wrap article:nth-of-type(1):hover:after{
+    top: 0; left: -230px;
+}
+section .inner .wrap article:nth-of-type(1)::after{
+    top: 0; left: 280px;
+}
+section .inner .wrap article:nth-of-type(2) p{
+    bottom: 7%; left: 35%;
+}
+section .inner .wrap article:nth-of-type(2):hover:after{
+    top: 150px; left: 0;
+}
+section .inner .wrap article:nth-of-type(2)::after{
+    top: -280px; left: 0;
+}
+section .inner .wrap article:nth-of-type(3) p {
+    top: 5%; left: 37%;
+}
+section .inner .wrap article:nth-of-type(3):hover:after{
+    top: -150px; right: 0;
+}
+section .inner .wrap article:nth-of-type(3)::after{
+    top: 280px; right: 0;
+}
+section .inner .wrap article:nth-of-type(4) p{
+    top: 45%; left: 80%;
+    transform: rotate(-90deg);
+}
+section .inner .wrap article:nth-of-type(4):hover:after{
+    bottom: 0; left: 230px;
+}
+section .inner .wrap article:nth-of-type(4)::after{
+    bottom: 0; left: -280px;
+}
